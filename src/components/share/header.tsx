@@ -1,0 +1,178 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Download, Menu, X, ArrowRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "Projects", href: "/projects" },
+  { name: "Skills", href: "/skills" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
+
+export default function Navbar() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  const isActiveRoute = (href: string) => {
+    return href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  return (
+    <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-6">
+      <div className="mx-auto max-w-7xl">
+        <nav
+          aria-label="Main navigation"
+          className="grid min-h-16 grid-cols-[1fr_auto_1fr] items-center rounded-2xl border border-border/70 bg-background/85 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl transition-colors duration-300 sm:px-6"
+        >
+          {/* LEFT: BRAND NAME */}
+          <Link
+            href="/"
+            className="group relative w-fit justify-self-start text-base font-bold tracking-tight sm:text-xl"
+            aria-label="Mofassel Hosain home"
+          >
+            <span className="bg-gradient-to-r from-primary via-violet-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent transition-[background-position] duration-500 group-hover:bg-right">
+              Mofassel Hosain
+            </span>
+
+            <span className="absolute -bottom-1 left-0 h-0.5 w-0 rounded-full bg-gradient-to-r from-primary to-violet-500 transition-all duration-300 ease-out group-hover:w-full" />
+          </Link>
+
+          {/* CENTER: DESKTOP NAVIGATION */}
+          <div className="hidden items-center justify-center gap-1 md:flex lg:gap-2">
+            {navItems.map((item) => {
+              const active = isActiveRoute(item.href);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`group relative rounded-xl px-3 py-2 text-sm font-medium transition-all duration-300 lg:px-4 ${
+                    active
+                      ? "bg-primary/5 text-primary"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  }`}
+                >
+                  <span className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5">
+                    {item.name}
+                  </span>
+
+                  <span
+                    className={`absolute bottom-1 left-3 right-3 h-0.5 origin-center rounded-full bg-primary transition-transform duration-300 ease-out lg:left-4 lg:right-4 ${
+                      active
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* RIGHT: RESUME + MOBILE TOGGLE */}
+          <div className="flex items-center justify-self-end gap-2">
+            <a
+              href="https://drive.google.com/file/d/1wmQglTMWpxZUAKTwx3zuFM4EtX-sHJYP/view?usp=sharing"
+                download="Mofassel_Hosain_Resume.pdf"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                tabIndex={isOpen ? 0 : -1}
+              className="hidden sm:inline-flex"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                className="group gap-2 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-md"
+              >
+                Resume
+                <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+              </Button>
+            </a>
+
+            <button
+              type="button"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border transition-all duration-300 hover:border-primary hover:bg-accent md:hidden"
+              onClick={() => setIsOpen((prev) => !prev)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+            >
+              {isOpen ? (
+                <X className="h-5 w-5 rotate-90 transition-transform duration-300" />
+              ) : (
+                <Menu className="h-5 w-5 transition-transform duration-300" />
+              )}
+            </button>
+          </div>
+        </nav>
+
+        {/* MOBILE NAVIGATION */}
+        <div
+          id="mobile-navigation"
+          aria-hidden={!isOpen}
+          className={`grid overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+            isOpen
+              ? "mt-2 grid-rows-[1fr] opacity-100"
+              : "pointer-events-none grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="min-h-0 overflow-hidden">
+            <nav
+              aria-label="Mobile navigation"
+              className="space-y-1 rounded-2xl border border-border/70 bg-background/95 p-3 shadow-xl backdrop-blur-xl"
+            >
+              {navItems.map((item, index) => {
+                const active = isActiveRoute(item.href);
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    tabIndex={isOpen ? 0 : -1}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => setIsOpen(false)}
+                    style={{
+                      transitionDelay: isOpen ? `${index * 40}ms` : "0ms",
+                    }}
+                    className={`group flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 hover:translate-x-1 hover:bg-accent ${
+                      active
+                        ? "bg-primary/5 text-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {item.name}
+                    <ArrowRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
+                  </Link>
+                );
+              })}
+
+              <a
+                href="/https://drive.google.com/file/d/1wmQglTMWpxZUAKTwx3zuFM4EtX-sHJYP/view?usp=sharing"
+                download="Mofassel_Hosain_Resume.pdf"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                tabIndex={isOpen ? 0 : -1}
+                className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:opacity-90"
+              >
+                <Download className="h-4 w-4" />
+                Download Resume
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
