@@ -7,12 +7,13 @@ import {
   ArrowDownRight,
   ArrowUpRight,
   Code2,
-  GitBranchPlus,
+
   Globe2,
   MapPin,
   Monitor,
   Rocket,
 } from "lucide-react";
+import { DiGithub } from "react-icons/di";
 
 const technologies = [
   { name: "React", className: "orbit-react" },
@@ -43,7 +44,7 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            ACTIVE SWE PIPELINE · AVAILABLE FOR HIRE
+           FULL-STACK DEVELOPER · OPEN TO WORK
           </div>
 
           <h1 className="max-w-2xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl xl:text-6xl">
@@ -101,7 +102,7 @@ export default function Hero() {
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold text-slate-300 transition-colors hover:text-cyan-400"
             >
-              Contact Me
+              Contact Me :mofassel6145@gmail.com
               <ArrowDownRight size={16} />
             </a>
           </div>
@@ -110,17 +111,17 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-400">
             <span className="inline-flex items-center gap-2">
               <MapPin size={15} className="text-cyan-400" />
-              Comilla, Bangladesh
+              Brahmanbaria, Bangladesh
             </span>
 
             <a
-              href="https://github.com/"
+              href="https://github.com/Mofassel100/home-nesty-frontend.git"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
               className="transition-colors hover:text-cyan-400"
             >
-              <GitBranchPlus size={19} />
+              <DiGithub size={19} />
             </a>
           </div>
         </div>

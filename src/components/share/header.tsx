@@ -11,7 +11,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Skills", href: "/skills" },
-  { name: "Education", href: "/education" },
+  { name: "Educations", href: "/education" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -23,6 +23,21 @@ export default function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
+  // Close mobile menu when the Escape key is pressed.
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const isActiveRoute = (href: string) => {
     return href === "/"
       ? pathname === "/"
@@ -31,15 +46,17 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-6">
-      <div className="mx-auto max-w-7xl">
+      <div className="relative mx-auto w-full max-w-7xl">
+        {/* MAIN NAVBAR */}
         <nav
           aria-label="Main navigation"
-          className="grid min-h-16 grid-cols-[1fr_auto_1fr] items-center rounded-2xl border border-border/70 bg-background/85 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl transition-colors duration-300 sm:px-6"
+          className="grid min-h-16 w-full grid-cols-[1fr_auto] items-center rounded-2xl border border-border/70 bg-background/90 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl transition-colors duration-300 sm:px-6 md:grid-cols-[1fr_auto_1fr]"
         >
-          {/* LEFT: BRAND NAME */}
+          {/* LEFT: BRAND */}
           <Link
             href="/"
-            className="group relative w-fit justify-self-start text-base font-bold tracking-tight sm:text-xl"
+            onClick={() => setIsOpen(false)}
+            className="group relative w-fit min-w-0 justify-self-start text-sm font-bold tracking-tight sm:text-xl"
             aria-label="Mofassel Hosain home"
           >
             <span className="bg-gradient-to-r from-primary via-violet-500 to-primary bg-[length:200%_auto] bg-clip-text text-transparent transition-[background-position] duration-500 group-hover:bg-right">
@@ -59,7 +76,7 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`group relative rounded-xl px-3 py-2 text-sm font-medium transition-all duration-300 lg:px-4 ${
+                  className={`group relative whitespace-nowrap rounded-xl px-3 py-2 text-sm font-medium transition-all duration-300 lg:px-4 ${
                     active
                       ? "bg-primary/5 text-primary"
                       : "text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -81,15 +98,14 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* RIGHT: RESUME + MOBILE TOGGLE */}
+          {/* RIGHT: RESUME + MOBILE MENU BUTTON */}
           <div className="flex items-center justify-self-end gap-2">
+            {/* Desktop resume button */}
             <a
               href="/resume/resume.pdf"
-                download="Mofassel_Hosain_Resume.pdf"
-                //  target="_blank"
-                //  rel="noopener noreferrer"
-                tabIndex={isOpen ? 0 : -1}
+              download="Mofassel_Hosain_Resume.pdf"
               className="hidden sm:inline-flex"
+              tabIndex={isOpen ? -1 : 0}
             >
               <Button
                 variant="outline"
@@ -101,9 +117,10 @@ export default function Navbar() {
               </Button>
             </a>
 
+            {/* Mobile menu toggle: always at the right */}
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border transition-all duration-300 hover:border-primary hover:bg-accent md:hidden"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background transition-all duration-300 hover:border-primary hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:hidden"
               onClick={() => setIsOpen((prev) => !prev)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
@@ -118,14 +135,14 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* MOBILE NAVIGATION */}
+        {/* MOBILE DROPDOWN */}
         <div
           id="mobile-navigation"
           aria-hidden={!isOpen}
-          className={`grid overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+          className={`absolute right-0 top-full z-50 grid w-full overflow-hidden transition-all duration-300 ease-in-out md:hidden sm:max-w-sm ${
             isOpen
               ? "mt-2 grid-rows-[1fr] opacity-100"
-              : "pointer-events-none grid-rows-[0fr] opacity-0"
+              : "pointer-events-none mt-0 grid-rows-[0fr] opacity-0"
           }`}
         >
           <div className="min-h-0 overflow-hidden">
@@ -153,16 +170,22 @@ export default function Navbar() {
                     }`}
                   >
                     {item.name}
-                    <ArrowRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
+
+                    <ArrowRight
+                      className={`h-4 w-4 transition-all duration-300 ${
+                        active
+                          ? "translate-x-0 text-primary opacity-100"
+                          : "translate-x-0 opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
+                      }`}
+                    />
                   </Link>
                 );
               })}
 
+              {/* Mobile resume download */}
               <a
-                  href="/resume/resume.pdf"
+                href="/resume/resume.pdf"
                 download="Mofassel_Hosain_Resume.pdf"
-                //  target="_blank"
-                //  rel="noopener noreferrer"
                 tabIndex={isOpen ? 0 : -1}
                 className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:opacity-90"
               >

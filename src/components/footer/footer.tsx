@@ -21,22 +21,22 @@ import {
 const socials = [
   {
     name: "GitHub",
-    href: "https://github.com/YOUR_USERNAME",
+    href: "https://github.com/Mofassel100",
     icon: FaGithub,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/YOUR_USERNAME/",
+    href: "https://www.linkedin.com/in/mofassel-hosain-ishaq",
     icon: FaLinkedin,
   },
   {
     name: "Facebook",
-    href: "https://www.facebook.com/YOUR_USERNAME",
+    href: "https://www.facebook.com/share/1HcxxbU6bk/",
     icon: FaFacebook,
   },
   {
     name: "WhatsApp",
-    href: "https://wa.me/8801XXXXXXXXX",
+    href: "https://wa.me/01752615522",
     icon: FaWhatsapp,
   },
 ];
@@ -156,7 +156,7 @@ export default function PortfolioFooter() {
             </p>
 
             <a
-              href="mailto:YOUR_EMAIL@gmail.com"
+              href="/contact"
               className="group inline-flex max-w-full items-center gap-3 rounded-xl border border-border bg-card/60 p-3 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
             >
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
@@ -169,7 +169,7 @@ export default function PortfolioFooter() {
                 </span>
 
                 <span className="block break-all text-sm font-medium">
-                  YOUR_EMAIL@gmail.com
+                 mofassel6145@gmail.com
                 </span>
               </span>
 
@@ -180,7 +180,7 @@ export default function PortfolioFooter() {
             </a>
 
             <a
-              href="https://wa.me/8801XXXXXXXXX"
+              href="https://wa.me/01752615522"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
