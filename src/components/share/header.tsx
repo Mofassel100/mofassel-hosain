@@ -11,7 +11,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Skills", href: "/skills" },
-  { name: "About", href: "/about" },
+  { name: "Education", href: "/education" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -84,10 +84,10 @@ export default function Navbar() {
           {/* RIGHT: RESUME + MOBILE TOGGLE */}
           <div className="flex items-center justify-self-end gap-2">
             <a
-              href="https://drive.google.com/file/d/1wmQglTMWpxZUAKTwx3zuFM4EtX-sHJYP/view?usp=sharing"
+              href="/resume/resume.pdf"
                 download="Mofassel_Hosain_Resume.pdf"
-                 target="_blank"
-                 rel="noopener noreferrer"
+                //  target="_blank"
+                //  rel="noopener noreferrer"
                 tabIndex={isOpen ? 0 : -1}
               className="hidden sm:inline-flex"
             >
@@ -159,10 +159,10 @@ export default function Navbar() {
               })}
 
               <a
-                href="/https://drive.google.com/file/d/1wmQglTMWpxZUAKTwx3zuFM4EtX-sHJYP/view?usp=sharing"
+                  href="/resume/resume.pdf"
                 download="Mofassel_Hosain_Resume.pdf"
-                 target="_blank"
-                 rel="noopener noreferrer"
+                //  target="_blank"
+                //  rel="noopener noreferrer"
                 tabIndex={isOpen ? 0 : -1}
                 className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:opacity-90"
               >

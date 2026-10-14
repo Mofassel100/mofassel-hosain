@@ -67,7 +67,7 @@ export default function Hero() {
           </h2>
 
           <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
-            CSE undergraduate at BAIUST building modern, performant and
+            CSE undergraduate at National University building modern, performant and
             accessible web products. I turn ideas into shipped interfaces —
             clean code, real deployments, measurable results.
           </p>
@@ -86,9 +86,11 @@ export default function Hero() {
             </Link>
 
             <a
-              href="https://drive.google.com/file/d/1yXszuLE-KaRa-pYCgbIsyGJhnJt7N93s/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
+               download="Mofassel_Hosain_Resume.pdf"
+                //  target="_blank"
+                //  rel="noopener noreferrer"
+                // tabIndex={isOpen ? 0 : -1}  
+             href="/resume/resume.pdf"
               className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:bg-cyan-400/5"
             >
               View Resume
@@ -96,7 +98,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="mailto:your-email@example.com"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold text-slate-300 transition-colors hover:text-cyan-400"
             >
               Contact Me

@@ -405,3 +405,42 @@
     transform: translate(-50%, -50%) translate(105px, 105px);
   }
 }
+
+
+/* Portfolio footer animations */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.25);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[fadeInUp_0\.6s_ease-out_both\],
+  .animate-\[fadeInUp_0\.7s_ease-out_both\] {
+    animation: none !important;
+  }
+}
